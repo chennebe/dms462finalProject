@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class player_movement : MonoBehaviour {
     public int playerspeed = 10;
@@ -50,5 +51,13 @@ public class player_movement : MonoBehaviour {
         localscale.x *= -1;
         transform.localScale = localscale;
 
+    }
+
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.tag == "Enemy")
+        {
+            SceneManager.LoadScene(1);
+        }
     }
 }
