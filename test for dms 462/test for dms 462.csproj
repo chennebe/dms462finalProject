@@ -285,6 +285,7 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\BattleUI.cs" />
     <Compile Include="Assets\Scripts\player_movement.cs" />
+    <Compile Include="Assets\Scripts\PlayerStats.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />
