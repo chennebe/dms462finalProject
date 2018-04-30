@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public static class PlayerScripts
+public static class PlayerStats
 {
 
-    private static int ATK, DEF, SPE, HP;
+    private static int ATK, DEF, SPE, HP;  
 
     public static int Attack
     {
