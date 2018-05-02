@@ -2,20 +2,31 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class BattleUI : MonoBehaviour {
 
     public GameObject BattleMenuUI;
     public GameObject InventoryMenuUI;
     public GameObject SpecialMenuUI;
+    public GameObject DialogueMenuUI;
     public GameObject enemyObj;
+
+    public Text message;
+    private string text;
+
     EnemyStateMachine eSM;
+    bool canPassDialogue = false;
+    TurnState nextState;
 
     void Start()
     {
         enemyObj = GameObject.Find("Enemy");
         eSM = (EnemyStateMachine)enemyObj.GetComponent(typeof(EnemyStateMachine));
 
+        message = DialogueMenuUI.GetComponentInChildren<Text>();
+
+        // This is for testing purposes.
         PlayerStats.Health = 100;
         PlayerStats.Attack = 10;
         PlayerStats.Defense = 10;
@@ -26,6 +37,7 @@ public class BattleUI : MonoBehaviour {
     {
         PLAYERTURN,
         ENEMYTURN,
+        PROCESSING,
         VICTORY,
         GAMEOVER
     }
@@ -35,9 +47,12 @@ public class BattleUI : MonoBehaviour {
     public void BattleFight()
     {
         Debug.Log("Attacking enemy...");
+        text = "The Player attacks " + eSM.enemy.name + " for " + PlayerStats.Attack + " damage! (Press space to continue)";
+        currentState = TurnState.PROCESSING;
         // Affect enemy HP based on player's attack and enemy defense.
         eSM.enemy.HP -= PlayerStats.Attack;
-        currentState = TurnState.ENEMYTURN;
+        nextState = TurnState.ENEMYTURN;
+        canPassDialogue = true;
     }
 
     public void BattleInventory()
@@ -76,8 +91,22 @@ public class BattleUI : MonoBehaviour {
 
     void EnemyAction()
     {
+        text = "The Player took " + eSM.enemy.ATK + " damage from the enemy! (Press space to continue)";
+        currentState = TurnState.PROCESSING;
         eSM.Attack();
-        currentState = TurnState.PLAYERTURN;
+        nextState = TurnState.PLAYERTURN;
+        canPassDialogue = true;
+    }
+
+    void PrintMessage(string text)
+    {
+        message.text = text;
+    }
+
+    void PassDialogue(TurnState tS)
+    {
+        currentState = tS;
+        canPassDialogue = false;
     }
 
     void Update()
@@ -91,9 +120,15 @@ public class BattleUI : MonoBehaviour {
             currentState = TurnState.GAMEOVER;
         }
 
+        if (canPassDialogue && Input.GetKeyDown(KeyCode.Space))
+        {
+            PassDialogue(nextState);
+        }
+
         switch (currentState)
         {
             case (TurnState.PLAYERTURN):
+                DialogueMenuUI.SetActive(false);
                 BattleMenuUI.SetActive(true);
                 Debug.Log("Player's turn");
                 break;
@@ -101,6 +136,11 @@ public class BattleUI : MonoBehaviour {
                 BattleMenuUI.SetActive(false);
                 Debug.Log("Enemy's turn");
                 EnemyAction();
+                break;
+            case (TurnState.PROCESSING):
+                BattleMenuUI.SetActive(false);
+                DialogueMenuUI.SetActive(true);
+                PrintMessage(text);
                 break;
             case (TurnState.VICTORY):
                 Debug.Log("Battle won, returning to overworld...");
