@@ -5,7 +5,8 @@ using UnityEngine;
 public static class PlayerStats
 {
 
-    private static int ATK, DEF, SPE, HP;  
+    private static int ATK, DEF, SPE, HP;
+    private static float posX = -10.8f, posY = -0.98f;
 
     public static int Attack
     {
@@ -52,6 +53,30 @@ public static class PlayerStats
         set
         {
             HP = value;
+        }
+    }
+
+    public static float positionX
+    {
+        get
+        {
+            return posX;
+        }
+        set
+        {
+            posX = value;
+        }
+    }
+
+    public static float positionY
+    {
+        get
+        {
+            return posY;
+        }
+        set
+        {
+            posY = value;
         }
     }
 }

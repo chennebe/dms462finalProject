@@ -12,6 +12,7 @@ public class BaseEnemy{
     }
 
     public string name;
+    public int index;
 
     public int HP;
     public int ATK;
