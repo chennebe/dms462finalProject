@@ -5164,6 +5164,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerspeed: 10
   playerjumppower: 400
+  playerHealth: 20
   groundMask:
     serializedVersion: 2
     m_Bits: 256
