@@ -10,6 +10,7 @@ public class player_movement : MonoBehaviour {
     private float movex;
     private Transform groundCheck;
     private bool isGrounded;
+    public int playerHealth;
 
     [SerializeField] private LayerMask groundMask;
 
@@ -26,6 +27,10 @@ public class player_movement : MonoBehaviour {
 
     // Update is called once per frame
     void Update () {
+        if(playerHealth <= 0)
+        {
+            SceneManager.LoadScene(0);
+        }
         Playermove();
         isGrounded = Physics2D.OverlapCapsule(groundCheck.position, new Vector2(1f, 1f), CapsuleDirection2D.Horizontal, 0, groundMask);		
         if (SceneManager.GetActiveScene().name == "level1")
@@ -77,6 +82,11 @@ public class player_movement : MonoBehaviour {
             EnemiesToDestroy.currentEnemy = other.name;
             EnemiesToDestroy.enemyList.Add(other.name);
             SceneManager.LoadScene(1);
+        }
+        if(other.tag == "spike")
+        {
+            print("a");
+            playerHealth = 0;
         }
     }
 }
