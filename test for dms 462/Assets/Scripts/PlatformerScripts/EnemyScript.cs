@@ -5,10 +5,6 @@ using UnityEngine;
 public class EnemyScript : MonoBehaviour {
 
     public BaseEnemy enemy;
-	
-	void Update () {
-
-	}
 
     void DestroyEnemy()
     {

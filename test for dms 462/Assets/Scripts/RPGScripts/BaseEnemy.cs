@@ -5,12 +5,6 @@ using UnityEngine;
 [System.Serializable]
 public class BaseEnemy{
 
-	public enum EnemyType
-    {
-        RedCube,
-        A
-    }
-
     public string name;
     public int index;
 

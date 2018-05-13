@@ -10,7 +10,9 @@ public class BattleUI : MonoBehaviour {
     public GameObject InventoryMenuUI;
     public GameObject SpecialMenuUI;
     public GameObject DialogueMenuUI;
-    public GameObject enemyObj;
+    private GameObject enemyObj;
+
+    public Sprite gndImg, flyImg, bossImg;
 
     public Text message;
     private string text;
@@ -23,6 +25,24 @@ public class BattleUI : MonoBehaviour {
     {
         enemyObj = GameObject.Find("Enemy");
         eSM = (EnemyStateMachine)enemyObj.GetComponent(typeof(EnemyStateMachine));
+
+        if (CurrentEnemy.Index == 0)
+        {
+            enemyObj.GetComponent<SpriteRenderer>().sprite = gndImg;
+        }
+        else if (CurrentEnemy.Index == 1)
+        {
+            enemyObj.GetComponent<SpriteRenderer>().sprite = flyImg;
+        }
+        else
+        {
+            enemyObj.GetComponent<SpriteRenderer>().sprite = bossImg;
+        }
+
+        eSM.enemy.HP = CurrentEnemy.Health;
+        eSM.enemy.ATK = CurrentEnemy.Attack;
+        eSM.enemy.DEF = CurrentEnemy.Defense;
+        eSM.enemy.SPE = CurrentEnemy.Speed;
 
         message = DialogueMenuUI.GetComponentInChildren<Text>();
 
