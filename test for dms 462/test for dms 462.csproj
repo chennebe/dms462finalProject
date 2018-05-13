@@ -285,6 +285,7 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\cameraFollow.cs" />
     <Compile Include="Assets\Scripts\EnemiesToDestroy.cs" />
+    <Compile Include="Assets\Scripts\PauseMenuUI.cs" />
     <Compile Include="Assets\Scripts\PlatformerScripts\EnemyScript.cs" />
     <Compile Include="Assets\Scripts\PlatformerScripts\player_movement.cs" />
     <Compile Include="Assets\Scripts\PlayerStats.cs" />
