@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CurrentEnemy : MonoBehaviour {
 
-    private static string name;
+    private new static string name;
     private static int index, ATK, DEF, SPE, HP;
     private static float posX = -10.8f, posY = -0.98f;
 

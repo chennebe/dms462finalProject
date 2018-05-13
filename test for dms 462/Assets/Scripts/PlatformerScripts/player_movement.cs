@@ -104,7 +104,7 @@ public class player_movement : MonoBehaviour {
             CurrentEnemy.Speed = currentE.enemy.SPE;
             CurrentEnemy.Health = currentE.enemy.HP;
             
-            SceneManager.LoadScene(1);
+            SceneManager.LoadScene(2);
         }
         if(other.tag == "spike")
         {

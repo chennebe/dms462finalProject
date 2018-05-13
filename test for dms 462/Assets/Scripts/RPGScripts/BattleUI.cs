@@ -92,7 +92,7 @@ public class BattleUI : MonoBehaviour {
     public void BattleEscape()
     {
         Debug.Log("Escaping...");
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene(1);
     }
 
     public void InventoryBack()
@@ -164,7 +164,7 @@ public class BattleUI : MonoBehaviour {
                 break;
             case (TurnState.VICTORY):
                 Debug.Log("Battle won, returning to overworld...");
-                SceneManager.LoadScene(0);
+                SceneManager.LoadScene(1);
                 break;
             case (TurnState.GAMEOVER):
                 Debug.Log("Game Over.");
